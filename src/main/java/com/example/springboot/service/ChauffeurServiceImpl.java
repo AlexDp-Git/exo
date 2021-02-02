@@ -21,22 +21,22 @@ public class ChauffeurServiceImpl implements ChauffeurService{
 	
 	
 	@Override
-	public Chauffeur createChauffeur(Chauffeur product) {
-		return chauffeurRepository.save(product);
+	public Chauffeur createChauffeur(Chauffeur chauffeur) {
+		return chauffeurRepository.save(chauffeur);
 	}
 
 	@Override
-	public Chauffeur updateChauffeur(Chauffeur product) {
-		Optional<Chauffeur> productDb = this.chauffeurRepository.findById(product.getId());
+	public Chauffeur updateChauffeur(Chauffeur chauffeur) {
+		Optional<Chauffeur> chauffeurDb = this.chauffeurRepository.findById(chauffeur.getId());
 		
-		if(productDb.isPresent()) {
-			Chauffeur productUpdate = productDb.get();
-			productUpdate.setId(product.getId());
-			productUpdate.setName(product.getName());
-			chauffeurRepository.save(productUpdate);
-			return productUpdate;
+		if(chauffeurDb.isPresent()) {
+			Chauffeur chauffeurUpdate = chauffeurDb.get();
+			chauffeurUpdate.setId(chauffeur.getId());
+			chauffeurUpdate.setName(chauffeur.getName());
+			chauffeurRepository.save(chauffeurUpdate);
+			return chauffeurUpdate;
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + product.getId());
+			throw new ResourceNotFoundException("Record not found with id : " + chauffeur.getId());
 		}		
 	}
 
@@ -46,25 +46,25 @@ public class ChauffeurServiceImpl implements ChauffeurService{
 	}
 
 	@Override
-	public Chauffeur getChauffeurById(long productId) {
+	public Chauffeur getChauffeurById(long chauffeurId) {
 		
-		Optional<Chauffeur> productDb = this.chauffeurRepository.findById(productId);
+		Optional<Chauffeur> chauffeurDb = this.chauffeurRepository.findById(chauffeurId);
 		
-		if(productDb.isPresent()) {
-			return productDb.get();
+		if(chauffeurDb.isPresent()) {
+			return chauffeurDb.get();
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + productId);
+			throw new ResourceNotFoundException("Record not found with id : " + chauffeurId);
 		}
 	}
 
 	@Override
-	public void deleteChauffeur(long productId) {
-		Optional<Chauffeur> productDb = this.chauffeurRepository.findById(productId);
+	public void deleteChauffeur(long chauffeurId) {
+		Optional<Chauffeur> chauffeurDb = this.chauffeurRepository.findById(chauffeurId);
 		
-		if(productDb.isPresent()) {
-			this.chauffeurRepository.delete(productDb.get());
+		if(chauffeurDb.isPresent()) {
+			this.chauffeurRepository.delete(chauffeurDb.get());
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + productId);
+			throw new ResourceNotFoundException("Record not found with id : " + chauffeurId);
 		}
 		
 	}

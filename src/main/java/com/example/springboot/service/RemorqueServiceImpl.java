@@ -21,22 +21,22 @@ public class RemorqueServiceImpl implements RemorqueService{
 	
 	
 	@Override
-	public Remorque createRemorque(Remorque product) {
-		return remorqueRepository.save(product);
+	public Remorque createRemorque(Remorque remorque) {
+		return remorqueRepository.save(remorque);
 	}
 
 	@Override
-	public Remorque updateRemorque(Remorque product) {
-		Optional<Remorque> productDb = this.remorqueRepository.findById(product.getId());
+	public Remorque updateRemorque(Remorque remorque) {
+		Optional<Remorque> remorqueDb = this.remorqueRepository.findById(remorque.getId());
 		
-		if(productDb.isPresent()) {
-			Remorque productUpdate = productDb.get();
-			productUpdate.setId(product.getId());
-			productUpdate.setName(product.getName());
-			remorqueRepository.save(productUpdate);
-			return productUpdate;
+		if(remorqueDb.isPresent()) {
+			Remorque remorqueUpdate = remorqueDb.get();
+			remorqueUpdate.setId(remorque.getId());
+			remorqueUpdate.setName(remorque.getName());
+			remorqueRepository.save(remorqueUpdate);
+			return remorqueUpdate;
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + product.getId());
+			throw new ResourceNotFoundException("Record not found with id : " + remorque.getId());
 		}		
 	}
 
@@ -46,25 +46,25 @@ public class RemorqueServiceImpl implements RemorqueService{
 	}
 
 	@Override
-	public Remorque getRemorqueById(long productId) {
+	public Remorque getRemorqueById(long remorqueId) {
 		
-		Optional<Remorque> productDb = this.remorqueRepository.findById(productId);
+		Optional<Remorque> remorqueDb = this.remorqueRepository.findById(remorqueId);
 		
-		if(productDb.isPresent()) {
-			return productDb.get();
+		if(remorqueDb.isPresent()) {
+			return remorqueDb.get();
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + productId);
+			throw new ResourceNotFoundException("Record not found with id : " + remorqueId);
 		}
 	}
 
 	@Override
-	public void deleteRemorque(long productId) {
-		Optional<Remorque> productDb = this.remorqueRepository.findById(productId);
+	public void deleteRemorque(long remorqueId) {
+		Optional<Remorque> remorqueDb = this.remorqueRepository.findById(remorqueId);
 		
-		if(productDb.isPresent()) {
-			this.remorqueRepository.delete(productDb.get());
+		if(remorqueDb.isPresent()) {
+			this.remorqueRepository.delete(remorqueDb.get());
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + productId);
+			throw new ResourceNotFoundException("Record not found with id : " + remorqueId);
 		}
 		
 	}

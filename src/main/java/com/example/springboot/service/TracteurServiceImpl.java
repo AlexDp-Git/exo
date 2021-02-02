@@ -21,22 +21,22 @@ public class TracteurServiceImpl implements TracteurService{
 	
 	
 	@Override
-	public Tracteur createTracteur(Tracteur product) {
-		return tracteurRepository.save(product);
+	public Tracteur createTracteur(Tracteur tracteur) {
+		return tracteurRepository.save(tracteur);
 	}
 
 	@Override
-	public Tracteur updateTracteur(Tracteur product) {
-		Optional<Tracteur> productDb = this.tracteurRepository.findById(product.getId());
+	public Tracteur updateTracteur(Tracteur tracteur) {
+		Optional<Tracteur> tracteurDb = this.tracteurRepository.findById(tracteur.getId());
 		
-		if(productDb.isPresent()) {
-			Tracteur productUpdate = productDb.get();
-			productUpdate.setId(product.getId());
-			productUpdate.setName(product.getName());
-			tracteurRepository.save(productUpdate);
-			return productUpdate;
+		if(tracteurDb.isPresent()) {
+			Tracteur tracteurUpdate = tracteurDb.get();
+			tracteurUpdate.setId(tracteur.getId());
+			tracteurUpdate.setName(tracteur.getName());
+			tracteurRepository.save(tracteurUpdate);
+			return tracteurUpdate;
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + product.getId());
+			throw new ResourceNotFoundException("Record not found with id : " + tracteur.getId());
 		}		
 	}
 
@@ -46,25 +46,25 @@ public class TracteurServiceImpl implements TracteurService{
 	}
 
 	@Override
-	public Tracteur getTracteurById(long productId) {
+	public Tracteur getTracteurById(long tracteurId) {
 		
-		Optional<Tracteur> productDb = this.tracteurRepository.findById(productId);
+		Optional<Tracteur> tracteurDb = this.tracteurRepository.findById(tracteurId);
 		
-		if(productDb.isPresent()) {
-			return productDb.get();
+		if(tracteurDb.isPresent()) {
+			return tracteurDb.get();
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + productId);
+			throw new ResourceNotFoundException("Record not found with id : " + tracteurId);
 		}
 	}
 
 	@Override
-	public void deleteTracteur(long productId) {
-		Optional<Tracteur> productDb = this.tracteurRepository.findById(productId);
+	public void deleteTracteur(long tracteurId) {
+		Optional<Tracteur> tracteurDb = this.tracteurRepository.findById(tracteurId);
 		
-		if(productDb.isPresent()) {
-			this.tracteurRepository.delete(productDb.get());
+		if(tracteurDb.isPresent()) {
+			this.tracteurRepository.delete(tracteurDb.get());
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + productId);
+			throw new ResourceNotFoundException("Record not found with id : " + tracteurId);
 		}
 		
 	}

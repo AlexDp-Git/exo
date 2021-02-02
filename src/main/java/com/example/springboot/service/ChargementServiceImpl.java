@@ -21,22 +21,22 @@ public class ChargementServiceImpl implements ChargementService{
 	
 	
 	@Override
-	public Chargement createChargement(Chargement product) {
-		return chargementRepository.save(product);
+	public Chargement createChargement(Chargement chargement) {
+		return chargementRepository.save(chargement);
 	}
 
 	@Override
-	public Chargement updateChargement(Chargement product) {
-		Optional<Chargement> productDb = this.chargementRepository.findById(product.getId());
+	public Chargement updateChargement(Chargement chargement) {
+		Optional<Chargement> chargementDb = this.chargementRepository.findById(chargement.getId());
 		
-		if(productDb.isPresent()) {
-			Chargement productUpdate = productDb.get();
-			productUpdate.setId(product.getId());
-			productUpdate.setName(product.getName());
-			chargementRepository.save(productUpdate);
-			return productUpdate;
+		if(chargementDb.isPresent()) {
+			Chargement chargementUpdate = chargementDb.get();
+			chargementUpdate.setId(chargement.getId());
+			chargementUpdate.setName(chargement.getName());
+			chargementRepository.save(chargementUpdate);
+			return chargementUpdate;
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + product.getId());
+			throw new ResourceNotFoundException("Record not found with id : " + chargement.getId());
 		}		
 	}
 
@@ -46,25 +46,25 @@ public class ChargementServiceImpl implements ChargementService{
 	}
 
 	@Override
-	public Chargement getChargementById(long productId) {
+	public Chargement getChargementById(long chargementId) {
 		
-		Optional<Chargement> productDb = this.chargementRepository.findById(productId);
+		Optional<Chargement> chargementDb = this.chargementRepository.findById(chargementId);
 		
-		if(productDb.isPresent()) {
-			return productDb.get();
+		if(chargementDb.isPresent()) {
+			return chargementDb.get();
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + productId);
+			throw new ResourceNotFoundException("Record not found with id : " + chargementId);
 		}
 	}
 
 	@Override
-	public void deleteChargement(long productId) {
-		Optional<Chargement> productDb = this.chargementRepository.findById(productId);
+	public void deleteChargement(long chargementId) {
+		Optional<Chargement> chargementDb = this.chargementRepository.findById(chargementId);
 		
-		if(productDb.isPresent()) {
-			this.chargementRepository.delete(productDb.get());
+		if(chargementDb.isPresent()) {
+			this.chargementRepository.delete(chargementDb.get());
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + productId);
+			throw new ResourceNotFoundException("Record not found with id : " + chargementId);
 		}
 		
 	}

@@ -33,23 +33,23 @@ public class ExpeditionServiceImpl implements ExpeditionService{
 	
 	
 	@Override
-	public Expedition createExpedition(Expedition product) {
-		return expeditionRepository.save(product);
+	public Expedition createExpedition(Expedition expedition) {
+		return expeditionRepository.save(expedition);
 	}
 
 	@Override
-	public Expedition updateExpedition(Expedition product) {
-		Optional<Expedition> productDb = this.expeditionRepository.findByIdTracteurIdAndIdRemorqueId(product.getId().getTracteur().getId(), product.getId().getRemorque().getId());
+	public Expedition updateExpedition(Expedition expedition) {
+		Optional<Expedition> expeditionDb = this.expeditionRepository.findByIdTracteurIdAndIdRemorqueId(expedition.getId().getTracteur().getId(), expedition.getId().getRemorque().getId());
 		
-		if(productDb.isPresent()) {
-			Expedition productUpdate = productDb.get();
-			productUpdate.setId(product.getId());
-			productUpdate.setChargement(product.getChargement());
-			productUpdate.setChauffeur(product.getChauffeur());
-			expeditionRepository.save(productUpdate);
-			return productUpdate;
+		if(expeditionDb.isPresent()) {
+			Expedition expeditionUpdate = expeditionDb.get();
+			expeditionUpdate.setId(expedition.getId());
+			expeditionUpdate.setChargement(expedition.getChargement());
+			expeditionUpdate.setChauffeur(expedition.getChauffeur());
+			expeditionRepository.save(expeditionUpdate);
+			return expeditionUpdate;
 		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + product.getId());
+			throw new ResourceNotFoundException("Record not found with id : " + expedition.getId());
 		}		
 	}
 
@@ -61,9 +61,9 @@ public class ExpeditionServiceImpl implements ExpeditionService{
 
 	@Override
 	public Expedition getExpeditionByTracteurIdAndRemorqueId(long tracteurId, long remorqueId) {
-		Optional<Expedition> productDb = this.expeditionRepository.findByIdTracteurIdAndIdRemorqueId(tracteurId, remorqueId);
-		if(productDb.isPresent()) {
-			return productDb.get();
+		Optional<Expedition> expeditionDb = this.expeditionRepository.findByIdTracteurIdAndIdRemorqueId(tracteurId, remorqueId);
+		if(expeditionDb.isPresent()) {
+			return expeditionDb.get();
 		} else {
 		throw new ResourceNotFoundException("Record not found with id : " + tracteurId + " and " + remorqueId);
 		}
@@ -71,8 +71,8 @@ public class ExpeditionServiceImpl implements ExpeditionService{
 
 	@Override
 	public void deleteExpeditionById(long tracteurId, long remorqueId) {
-		Optional<Expedition> productDb = this.expeditionRepository.findByIdTracteurIdAndIdRemorqueId(tracteurId, remorqueId);
-		if(productDb.isPresent()) {
+		Optional<Expedition> expeditionDb = this.expeditionRepository.findByIdTracteurIdAndIdRemorqueId(tracteurId, remorqueId);
+		if(expeditionDb.isPresent()) {
 			this.expeditionRepository.deleteByIdTracteurAndRemorque(tracteurId, remorqueId);
 		} else {
 		throw new ResourceNotFoundException("Record not found with id : " + tracteurId + " and " + remorqueId);
