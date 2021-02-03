@@ -1,1 +1,1 @@
-# exo
+# Exercice
